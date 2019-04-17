@@ -2,9 +2,7 @@
 
 const program = require('commander');
 const inquirer = require('inquirer');
-const chalk = require('chalk');
 const shell = require('shelljs');
-const createService = require('./action/createService');
 const initProject = require('./action/initProject');
 
 program
@@ -26,8 +24,6 @@ program
 
     let promps = [];
 
-    createService();
-
     if (config.projectName === null) {
       promps.push({
         type: 'input',
@@ -44,8 +40,7 @@ program
     }
 
     inquirer.prompt(promps).then(async (answers) => {
-      console.log(answers);
-      initProject();
+      initProject(config);
       // shell.exec('git clone https://github.com/detectiveHLH/venus-demo.git ' + config.projectName);
       // await shell.exec('mkdir ' + config.projectName);
       // await shell.cd(config.projectName);
