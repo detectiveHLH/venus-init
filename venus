@@ -2,7 +2,6 @@
 
 const program = require('commander');
 const inquirer = require('inquirer');
-const shell = require('shelljs');
 const initProject = require('./action/initProject');
 
 program
@@ -41,10 +40,6 @@ program
 
     inquirer.prompt(promps).then(async (answers) => {
       initProject(config);
-      // shell.exec('git clone https://github.com/detectiveHLH/venus-demo.git ' + config.projectName);
-      // await shell.exec('mkdir ' + config.projectName);
-      // await shell.cd(config.projectName);
-      // await shell.exec('pwd');
     });
   });
 

@@ -23,6 +23,39 @@ exports.log = (content, color = 'blue') => {
  *
  * @param dirName
  */
-exports.mkdir = async (dirName) => {
-  await shell.exec('mkdir ' + dirName);
+exports.mkdir = (dirName) => {
+  const res = shell.exec('mkdir ' + dirName);
+  return res.code !== 1;
+};
+
+/**
+ * 进入目录
+ *
+ * @param dirName
+ */
+exports.cd = (dirName) => {
+  shell.cd(dirName);
+};
+
+/**
+ * 拷贝文件到指定目录
+ *
+ * @param source
+ * @param target
+ */
+exports.cp = (source, target) => {
+  shell.cp('-R', source, target);
+};
+
+/**
+ * 删除指定文件
+ *
+ * @param source
+ * @param target
+ */
+exports.rm = (target) => {
+  if (target.indexOf('*') !== -1) {
+    return;
+  }
+  shell.rm('-rf', target);
 };
