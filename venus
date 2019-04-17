@@ -3,14 +3,54 @@
 const program = require('commander');
 const inquirer = require('inquirer');
 const chalk = require('chalk');
+const shell = require('shelljs');
+const createService = require('./action/createService');
+const initProject = require('./action/initProject');
+
 program
-    .command('module')
-    .alias('m')
-    .description('创建新的模块')
-    .option('-a, --name [moduleName]', '模块名称')
-    .action(option => {
-        console.log('Hello World')
-        //为什么是Hello World 给你个眼神，自己去体会...
+  .command('service [serviceName]')
+  .alias('s')
+  .description('创建新的service模块')
+  .action(option => {
+    console.log(option);
+  });
+
+program
+  .command('init')
+  .alias('i')
+  .description('初始化新的Spring Cloud微服务项目')
+  .action(option => {
+    let config = {
+      projectName: null
+    };
+
+    let promps = [];
+
+    createService();
+
+    if (config.projectName === null) {
+      promps.push({
+        type: 'input',
+        name: 'projectName',
+        message: '请输入项目名称',
+        validate: input => {
+          if (!input) {
+            return '不能为空';
+          }
+          config.projectName = input;
+          return true;
+        }
+      });
+    }
+
+    inquirer.prompt(promps).then(async (answers) => {
+      console.log(answers);
+      initProject();
+      // shell.exec('git clone https://github.com/detectiveHLH/venus-demo.git ' + config.projectName);
+      // await shell.exec('mkdir ' + config.projectName);
+      // await shell.cd(config.projectName);
+      // await shell.exec('pwd');
     });
+  });
 
 program.parse(process.argv);

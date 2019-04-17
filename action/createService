@@ -1,0 +1,7 @@
+#! /usr/bin/env node
+
+const createService = () => {
+  console.log('create');
+};
+
+module.exports = createService;
