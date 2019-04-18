@@ -2,6 +2,7 @@
 
 const program = require('commander');
 const inquirer = require('inquirer');
+const chalk = require('chalk');
 const initProject = require('./action/initProject');
 
 program
@@ -21,8 +22,10 @@ program
       projectName: null
     };
 
-    let promps = [];
+    // Print version of venus
+    console.log(chalk.default.bold('venus v1.0.0'));
 
+    let promps = [];
     if (config.projectName === null) {
       promps.push({
         type: 'input',

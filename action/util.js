@@ -14,7 +14,7 @@ const shell = require('shelljs');
  * @param content
  * @param color
  */
-exports.log = (content, color = 'blue') => {
+exports.log = (content, color = 'white') => {
   console.log(chalk[color](content));
 };
 
