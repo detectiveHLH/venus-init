@@ -23,7 +23,7 @@ program
     };
 
     // Print version of venus
-    console.log(chalk.default.bold('venus v1.0.0'));
+    console.log(chalk.default.bold('venus v1.0.3'));
 
     let promps = [];
     if (config.projectName === null) {
