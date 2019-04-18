@@ -1,5 +1,5 @@
 {
-  "name": "venus",
+  "name": "venus-init",
   "version": "1.0.0",
   "description": "A tool to generate spring cloud project",
   "main": "index.js",
@@ -28,5 +28,6 @@
     "commander": "^2.20.0",
     "inquirer": "^6.3.1",
     "shelljs": "^0.8.3"
-  }
+  },
+  "dependencies": {}
 }
