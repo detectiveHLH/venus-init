@@ -5,13 +5,13 @@ const inquirer = require('inquirer');
 const chalk = require('chalk');
 const initProject = require('./action/initProject');
 
-program
-  .command('service [serviceName]')
-  .alias('s')
-  .description('创建新的service模块')
-  .action(option => {
-    console.log(option);
-  });
+// program
+//   .command('service [serviceName]')
+//   .alias('s')
+//   .description('创建新的service模块')
+//   .action(option => {
+//     console.log(option);
+//   });
 
 program
   .command('init')
@@ -19,30 +19,48 @@ program
   .description('初始化新的Spring Cloud微服务项目')
   .action(option => {
     let config = {
-      projectName: null
+      group: null,
+      artifact: null,
     };
 
     // Print version of venus
-    console.log(chalk.default.bold('venus v1.0.3'));
+    console.log(chalk.default.bold('venus v1.0.4'));
 
     let promps = [];
-    if (config.projectName === null) {
+
+    if (config.group === null) {
       promps.push({
         type: 'input',
-        name: 'projectName',
-        message: '请输入项目名称',
+        name: 'group',
+        message: '请输入Group',
         validate: input => {
           if (!input) {
-            return '不能为空';
+            return 'Group不能为空';
           }
-          config.projectName = input;
+          config.group = input;
+          return true;
+        }
+      });
+    }
+
+    if (config.artifact === null) {
+      promps.push({
+        type: 'input',
+        name: 'artifact',
+        message: '请输入Artifact',
+        validate: input => {
+          if (!input) {
+            return 'Artifact不能为空';
+          }
+          config.artifact = input;
           return true;
         }
       });
     }
 
     inquirer.prompt(promps).then(async (answers) => {
-      initProject(config);
+      console.log(config);
+      // initProject(config);
     });
   });
 
