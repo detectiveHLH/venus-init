@@ -1,5 +1,5 @@
 <h1 align="center">venus-init</h1>
-Venus-init is the tool for spring cloud application development
+Venus-init is the tool for spring application development. You can start a Spring Boot application with a single command.
 
 
 ## Install
@@ -15,6 +15,52 @@ venus init
 Or you can type like this.
 ```bash
 venus i
+```
+
+## Example
+Below is the structure of a demo project that created by the cli.
+```
+├── LICENSE
+├── README.md
+├── api
+│   ├── pom.xml
+│   └── src
+│       └── main
+│           ├── java
+│           │   └── com
+│           │       └── detectivehlh
+│           │           └── demo
+│           │               └── api
+│           │                   ├── Application.java
+│           │                   ├── config
+│           │                   │   └── DbConfig.java
+│           │                   ├── controller
+│           │                   │   └── HelloController.java
+│           │                   ├── dao
+│           │                   │   └── HelloMapper.java
+│           │                   ├── dto
+│           │                   │   └── HelloDTO.java
+│           │                   ├── entity
+│           │                   │   └── Hello.java
+│           │                   └── service
+│           │                       ├── HelloService.java
+│           │                       └── impl
+│           │                           └── HelloServiceImpl.java
+│           └── resources
+│               ├── application.yml
+│               └── mapper
+│                   └── HelloMapper.xml
+└── pom.xml
+```
+Inside the project, we have a unit named Hello to help you understand this project more Efficiently
+
+when you start the project successfully. Visit [http://localhost:8080/hello](http://localhost:8080/hello)，when you see the message below, congratulations! It worked.
+
+```json
+{
+    "message": "Hello world",
+    "createdAt": "current_timestamp"
+}
 ```
 
 ## Licences
