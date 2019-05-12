@@ -59,7 +59,6 @@ program
     }
 
     inquirer.prompt(promps).then(async (answers) => {
-      console.log(config);
       initProject(config);
     });
   });

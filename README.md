@@ -52,7 +52,7 @@ Below is the structure of a demo project that created by the cli.
 │                   └── HelloMapper.xml
 └── pom.xml
 ```
-Inside the project, we have a unit named Hello to help you understand this project more Efficiently
+Inside the project, we have a unit named Hello to help you understand this project more efficiently
 
 when you start the project successfully. Visit [http://localhost:8080/hello](http://localhost:8080/hello)，when you see the message below, congratulations! It worked.
 
