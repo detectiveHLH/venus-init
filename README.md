@@ -20,6 +20,7 @@ venus i
 ## Example
 Below is the structure of a demo project that created by the cli.
 ```
+.
 ├── LICENSE
 ├── README.md
 ├── api
@@ -33,7 +34,8 @@ Below is the structure of a demo project that created by the cli.
 │           │               └── api
 │           │                   ├── Application.java
 │           │                   ├── config
-│           │                   │   └── DbConfig.java
+│           │                   │   ├── DbConfig.java
+│           │                   │   └── SwaggerConfig.java
 │           │                   ├── controller
 │           │                   │   └── HelloController.java
 │           │                   ├── dao
