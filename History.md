@@ -1,3 +1,6 @@
+## 1.0.6/2019-05-12
+* Add swagger support in project.
+
 ## 1.0.5/2019-05-12
 * Update README.md on npm.com.
 
