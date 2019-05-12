@@ -1,6 +1,6 @@
 {
   "name": "venus-init",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A tool to generate spring cloud project",
   "main": "index.js",
   "bin": {

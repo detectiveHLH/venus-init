@@ -6,11 +6,11 @@ const { log, mkdir, cd, cp, rm } = require('./util');
  * Initial project
  */
 const initProject = (config) => {
-  const { projectName } = config;
-  const PROJECT_GROUP_ID = 'PROJECT_GROUP_ID';
-  const PROJECT_NAME = 'PROJECT_NAME';
+  const { artifact, group } = config;
+  const GROUP = 'GROUP';
+  const ARTIFACT = 'ARTIFACT';
   const API_MODULE = 'api';
-  const SHARED_MODULE = 'shared';
+  const INITIAL_MENUS = ['config', 'controller', 'dao', 'dto', 'entity', 'service'];
 
 
   /**
@@ -20,130 +20,92 @@ const initProject = (config) => {
   log('Initialing the project...');
 
 
-  console.log(chalk`{white.bold [1/4]} 🔍` + chalk`{default.bold Clone project into local path...}`);
-  shell.exec('git clone https://github.com/detectiveHLH/venus-demo.git ' + config.projectName);
+  console.log(chalk`{white.bold [1/3]} 🔍` + chalk`{default.bold Clone project into local path...}`);
+  shell.exec('git clone https://github.com/detectiveHLH/venus-demo.git ' + config.artifact);
 
   /**
    * Into the main directory and remove the git directory
    */
-  cd(projectName);
+  cd(artifact);
   rm('.git');
 
   /**
    * - Replace file in root directory
    */
-  console.log(chalk`{white.bold [2/4] 🚚}` + chalk`{default.bold Creating root path...}`);
+  console.log(chalk`{white.bold [2/3] 🚚}` + chalk`{default.bold Creating root path...}`);
   shell.ls('*.xml').forEach(file => {
-    shell.sed('-i', PROJECT_NAME, projectName, file);
-    shell.sed('-i', PROJECT_GROUP_ID, convertToDot(projectName), file);
+    shell.sed('-i', ARTIFACT, artifact, file);
+    shell.sed('-i', GROUP, group, file);
   });
 
   /**
    * Start replace in api module
    */
-  console.log(chalk`{white.bold [3/4] 🔗}` + chalk`{default.bold Create api module...}`);
+  console.log(chalk`{white.bold [3/3] 🔗}` + chalk`{default.bold Create api module...}`);
   cd(API_MODULE);
 
   // Replace parameter in api pom.xml
   shell.ls('*.xml').forEach(file => {
-    shell.sed('-i', PROJECT_NAME, projectName, file);
-    shell.sed('-i', PROJECT_GROUP_ID, convertToDot(projectName), file);
+    shell.sed('-i', ARTIFACT, artifact, file);
+    shell.sed('-i', GROUP, group, file);
   });
 
-  cd('src/main');
-  cd('resources');
-
+  cd('src/main/resources');
   shell.ls('*.yml').forEach(file => {
-    shell.sed('-i', PROJECT_NAME, projectName, file);
-    shell.sed('-i', PROJECT_GROUP_ID, convertToDot(projectName), file);
+    shell.sed('-i', ARTIFACT, artifact, file);
+    shell.sed('-i', GROUP, group, file);
   });
 
-  cd('..');
+  cd('mapper');
+  shell.ls('*.xml').forEach(file => {
+    shell.sed('-i', ARTIFACT, artifact, file);
+    shell.sed('-i', GROUP, group, file);
+  });
 
-
-  cd('java/com/t4f/web');
+  cd('../../java');
 
   /**
    * Rename the package name
    */
-  // shell.exec('ls');
-  rm(PROJECT_GROUP_ID);
-
   let dirNum = 0;
-  let packages = projectName.split('-');
+  let packages = group.split('.');
+  let groupPath = '';
   packages.forEach((element) => {
+    groupPath += `${element}/`;
     mkdir(element);
     cd(element);
     dirNum++;
   });
   mkdir(API_MODULE);
 
-  cd(API_MODULE);
-  // shell.exec('touch Application.java');
-  shell.exec(`echo "package com.t4f.web.${convertToDot(projectName)}.api;" >> Application.java`);
-  shell.exec('echo "" >> Application.java');
-  shell.exec('echo "import lombok.extern.slf4j.Slf4j;" >> Application.java');
-  shell.exec('echo "import org.springframework.boot.SpringApplication;" >> Application.java');
-  shell.exec('echo "import org.springframework.boot.autoconfigure.SpringBootApplication;" >> Application.java');
-  shell.exec('echo "import org.springframework.cloud.openfeign.EnableFeignClients;" >> Application.java');
-  shell.exec('echo "" >> Application.java');
-  shell.exec('echo "@SpringBootApplication" >> Application.java');
-  shell.exec('echo "@EnableFeignClients" >> Application.java');
-  shell.exec('echo "@Slf4j" >> Application.java');
-  shell.exec('echo "public class Application {" >> Application.java');
-  shell.exec('echo "    public static void main(String[] args) {" >> Application.java');
-  shell.exec('echo "        SpringApplication.run(Application.class, args);" >> Application.java');
-  shell.exec('echo "    }" >> Application.java');
-  shell.exec('echo "}" >> Application.java');
-  mkdir('config');
-  mkdir('consts');
-  mkdir('controller');
-  mkdir('dao');
-  mkdir('entity');
-  mkdir('service');
-  mkdir('util');
-
-  /**
-   * - Return to root directory
-   */
-  cd('../../../../../../../../');
   for (let i = 0; i < dirNum; i++) {
     cd('..');
   }
 
-  /**
-   * - Into shared directory
-   */
-  console.log(chalk`{white.bold [4/4] 📃}` + chalk`{default.bold Create shared module...}`);
-  cd(SHARED_MODULE);
+  cp(`${GROUP}/api`, `${groupPath}`);
 
-  shell.ls('*.xml').forEach(file => {
-    shell.sed('-i', PROJECT_NAME, projectName, file);
-    shell.sed('-i', PROJECT_GROUP_ID, convertToDot(projectName), file);
+  rm(`${GROUP}`);
+
+  cd(`${groupPath}/api`);
+  shell.ls('*.java').forEach(file => {
+    shell.sed('-i', GROUP, group, file);
   });
 
-  cd('src/main/java/com/t4f/web');
-  rm(PROJECT_GROUP_ID);
 
-  dirNum = 0;
-  packages.forEach((element) => {
-    mkdir(element);
-    cd(element);
-    dirNum++;
+  for (let i = 0; i < INITIAL_MENUS.length; i++) {
+    const path = i === 0 ? `${INITIAL_MENUS[i]}` : `../${INITIAL_MENUS[i]}`;
+    cd(`${path}`);
+    shell.ls('*.java').forEach(file => {
+      shell.sed('-i', GROUP, group, file);
+    });
+  }
+  cd ('impl');
+  shell.ls('*.java').forEach(file => {
+    shell.sed('-i', GROUP, group, file);
   });
-  mkdir(SHARED_MODULE);
-
-  cd(SHARED_MODULE);
 
   log('✨ Done. ', 'green');
 
-};
-
-/**
- * Convert '-' to '.'
- */
-const convertToDot = (s) => {
-  return s.replace(/-/g, '.');
 };
 
 module.exports = initProject;
