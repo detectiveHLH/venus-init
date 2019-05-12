@@ -1,3 +1,6 @@
+## 1.0.7/2019-05-12
+* Fix the current version in cli command.
+
 ## 1.0.6/2019-05-12
 * Add swagger support in project.
 
