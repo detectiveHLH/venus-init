@@ -1,6 +1,6 @@
 {
   "name": "venus-init",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A tool to generate spring cloud project",
   "main": "index.js",
   "bin": {
@@ -14,7 +14,7 @@
     "url": "git+https://github.com/detectiveHLH/venus.git"
   },
   "keywords": [
-    "spring-cloud",
+    "spring boot",
     "cli"
   ],
   "author": "detectiveHLH",

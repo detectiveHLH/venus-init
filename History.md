@@ -1,3 +1,6 @@
+## 1.0.5/2019-05-12
+* Update README.md on npm.com.
+
 ## 1.0.4/2019-05-12
 * Change project from spring cloud application to single spring boot application.
 
