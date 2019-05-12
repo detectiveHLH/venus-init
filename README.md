@@ -63,5 +63,8 @@ when you start the project successfully. Visit [http://localhost:8080/hello](htt
 }
 ```
 
+## Swagger
+You can visit [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) to see your api documentation that generate automatically by swagger.
+
 ## Licences
 [MIT](https://github.com/detectiveHLH/venus-init/blob/master/LICENSE)
