@@ -17,6 +17,9 @@ Or you can type like this.
 venus i
 ```
 
+## Note
+**You need to copy all the files in the project that createad by cli into another project**
+
 ## Example
 Below is the structure of a demo project that created by the cli.
 ```
